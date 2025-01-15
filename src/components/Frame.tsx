@@ -8,25 +8,8 @@ import sdk, {
   SignIn as SignInCore,
   type Context,
 } from "@farcaster/frame-sdk";
-import {
-  useAccount,
-  useSendTransaction,
-  useSignMessage,
-  useSignTypedData,
-  useWaitForTransactionReceipt,
-  useDisconnect,
-  useConnect,
-  useSwitchChain,
-  useChainId,
-} from "wagmi";
-
-import { config } from "~/components/providers/WagmiProvider";
+import { useAccount } from "wagmi";
 import { PurpleButton } from "~/components/ui/PurpleButton";
-import { truncateAddress } from "~/lib/truncateAddress";
-import { base, optimism } from "wagmi/chains";
-import { useSession } from "next-auth/react";
-import { createStore } from "mipd";
-import { Label } from "~/components/ui/label";
 import { PROJECT_TITLE } from "~/lib/constants";
 
 interface QuizQuestion {
@@ -58,43 +41,7 @@ export default function Frame(
     }
   ];
 
-  const [addFrameResult, setAddFrameResult] = useState("");
-
-  const { address, isConnected } = useAccount();
-  const chainId = useChainId();
-
-  const {
-    sendTransaction,
-    error: sendTxError,
-    isError: isSendTxError,
-    isPending: isSendTxPending,
-  } = useSendTransaction();
-
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash: txHash as `0x${string}`,
-    });
-
-  const {
-    signTypedData,
-    error: signTypedError,
-    isError: isSignTypedError,
-    isPending: isSignTypedPending,
-  } = useSignTypedData();
-
-  const { disconnect } = useDisconnect();
-  const { connect } = useConnect();
-
-  const {
-    switchChain,
-    error: switchChainError,
-    isError: isSwitchChainError,
-    isPending: isSwitchChainPending,
-  } = useSwitchChain();
-
-  const handleSwitchChain = useCallback(() => {
-    switchChain({ chainId: chainId === base.id ? optimism.id : base.id });
-  }, [switchChain, chainId]);
+  const { address } = useAccount();
 
   useEffect(() => {
     const load = async () => {
@@ -156,27 +103,6 @@ export default function Frame(
     }
   }, [isSDKLoaded]);
 
-  const addFrame = useCallback(async () => {
-    try {
-      const result = await sdk.actions.addFrame();
-
-      setAddFrameResult(
-        result.notificationDetails
-          ? `Added, got notificaton token ${result.notificationDetails.token} and url ${result.notificationDetails.url}`
-          : "Added, got no notification details"
-      );
-    } catch (error) {
-      if (error instanceof AddFrame.RejectedByUser) {
-        setAddFrameResult(`Not added: ${error.message}`);
-      }
-
-      if (error instanceof AddFrame.InvalidDomainManifest) {
-        setAddFrameResult(`Not added: ${error.message}`);
-      }
-
-      setAddFrameResult(`Error: ${error}`);
-    }
-  }, []);
 
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
