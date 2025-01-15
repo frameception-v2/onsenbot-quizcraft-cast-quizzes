@@ -100,18 +100,18 @@ export default function Frame(
       <div className="w-[300px] mx-auto py-8 px-2">
         <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+            <CardTitle className="text-2xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500 bg-clip-text text-transparent">
               {title}
             </CardTitle>
           </CardHeader>
-        
-        {showScore ? (
+          
+          {showScore ? (
           <CardContent className="text-center">
-            <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500 bg-clip-text text-transparent">
               Quiz Complete!
             </h2>
             <p className="mb-4 text-neutral-700">You scored {score} out of {quizData.length}</p>
-            <PurpleButton onClick={restartQuiz} className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
+            <PurpleButton onClick={restartQuiz} className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500 hover:from-purple-700 hover:via-blue-600 hover:to-pink-600">
               Restart Quiz
             </PurpleButton>
           </CardContent>

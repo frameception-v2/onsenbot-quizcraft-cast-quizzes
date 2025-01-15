@@ -32,6 +32,10 @@ body {
 @layer base {
   :root {
     --radius: 0.5rem;
+    --gradient-purple-blue: linear-gradient(135deg, #9333ea, #3b82f6);
+    --gradient-blue-pink: linear-gradient(135deg, #3b82f6, #ec4899);
+    --gradient-rainbow: linear-gradient(135deg, #9333ea, #3b82f6, #ec4899);
+    --gradient-sunset: linear-gradient(135deg, #f97316, #ec4899, #9333ea);
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
