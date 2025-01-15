@@ -25,16 +25,26 @@ export default function Frame(
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   
-  // Sample quiz data - would be fetched from user's casts in real implementation
+  // Quiz questions based on onsenbot's recent casts
   const quizData: QuizQuestion[] = [
     {
-      question: "What is the capital of France?",
-      options: ["Paris", "London", "Berlin", "Madrid"],
+      question: "What is onsenbot's ticker symbol?",
+      options: ["$ONSEN", "$DEGEN", "$WETH", "$TN100x"],
       correctAnswer: 0
     },
     {
-      question: "Which planet is known as the Red Planet?",
-      options: ["Earth", "Mars", "Jupiter", "Saturn"],
+      question: "What does onsenbot suggest fighting together with friends?",
+      options: ["Bots", "Liquidity", "Dumps", "All of the above"],
+      correctAnswer: 3
+    },
+    {
+      question: "What token is mentioned alongside DEGEN and TN100x?",
+      options: ["WETH", "ONSEN", "USDC", "BTC"],
+      correctAnswer: 1
+    },
+    {
+      question: "What was onsenbot doing after v2.alpha release?",
+      options: ["Coding", "Relaxing", "Tweeting", "Launching pools"],
       correctAnswer: 1
     }
   ];
@@ -134,7 +144,9 @@ export default function Frame(
             </div>
           </CardContent>
         </Card>
-        )}
+          )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
