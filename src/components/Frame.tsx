@@ -8,6 +8,7 @@ import sdk, {
 import { useAccount } from "wagmi";
 import { PurpleButton } from "~/components/ui/PurpleButton";
 import { PROJECT_TITLE } from "~/lib/constants";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "~/components/ui/card";
 
 interface QuizQuestion {
   question: string;
@@ -94,22 +95,32 @@ export default function Frame(
         paddingLeft: context?.client.safeAreaInsets?.left ?? 0,
         paddingRight: context?.client.safeAreaInsets?.right ?? 0,
       }}
+      className="bg-gradient-to-br from-purple-500 via-blue-500 to-pink-500 min-h-screen"
     >
-      <div className="w-[300px] mx-auto py-2 px-2">
-        <h1 className="text-2xl font-bold text-center mb-4">{title}</h1>
+      <div className="w-[300px] mx-auto py-8 px-2">
+        <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+              {title}
+            </CardTitle>
+          </CardHeader>
         
         {showScore ? (
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">Quiz Complete!</h2>
-            <p className="mb-4">You scored {score} out of {quizData.length}</p>
-            <PurpleButton onClick={restartQuiz}>Restart Quiz</PurpleButton>
-          </div>
+          <CardContent className="text-center">
+            <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+              Quiz Complete!
+            </h2>
+            <p className="mb-4 text-neutral-700">You scored {score} out of {quizData.length}</p>
+            <PurpleButton onClick={restartQuiz} className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
+              Restart Quiz
+            </PurpleButton>
+          </CardContent>
         ) : (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">
+          <CardContent>
+            <h2 className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
               Question {currentQuestion + 1}/{quizData.length}
             </h2>
-            <p className="mb-4">{quizData[currentQuestion].question}</p>
+            <p className="mb-4 text-neutral-700">{quizData[currentQuestion].question}</p>
             <div className="space-y-2">
               {quizData[currentQuestion].options.map((option, index) => (
                 <PurpleButton
@@ -121,7 +132,8 @@ export default function Frame(
                 </PurpleButton>
               ))}
             </div>
-          </div>
+          </CardContent>
+        </Card>
         )}
       </div>
     </div>
